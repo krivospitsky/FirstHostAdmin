@@ -38,3 +38,9 @@ end
 
 # To use debugger
 # gem 'debugger'
+
+	gem 'rpam'
+
+platforms :ruby do # linux
+	gem 'rpam'
+end
