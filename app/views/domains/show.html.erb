@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fqdn:</b>
+  <%= @domain.fqdn %>
+</p>
+
+<p>
+  <b>Alias:</b>
+  <%= @domain.alias %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @domain.user.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_domain_path(@domain) %> |
+<%= link_to 'Back', domains_path %>

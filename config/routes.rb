@@ -1,4 +1,8 @@
 FirstHostAdmin::Application.routes.draw do
+  resources :mailboxes
+
+  resources :domains
+
   resources :users
 
   # The priority is based upon order of creation:

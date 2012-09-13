@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :name
+  attr_accessible :email, :name, :gid, :uid
+  has_many :domains
   before_create :do_create
   before_destroy :do_destroy
   def do_create
-    system("touch ~/1.txt")
-#    system("sudo", "adduser #{self.name}")
+    system("sudo adduser #{self.name} && adduser #{self.name} www-data")
   end
   def do_destroy
     system("sudo deluser ", self.name)

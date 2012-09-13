@@ -1,0 +1,73 @@
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start the APPLICATION unicorns at boot
+# Description:       Enable APPLICATION at boot time.
+### END INIT INFO
+# 
+# Use this as a basis for your own Unicorn init script.
+# Change APPLICATION to match your app.
+# Make sure that all paths are correct.
+
+set -u
+set -e
+
+
+ulimit -n 1000000
+
+# Change these to match your app:
+APP_NAME=<%= @app %>
+APP_ROOT="/home/webmaster/projects/$APP_NAME"
+PID="/home/webmaster/projects/$APP_NAME/shared/unicorn.pid"
+ENV=production
+
+UNICORN_OPTS="-D -E $ENV -c /etc/unicorn/$APP_NAME.rb"
+
+
+SET_PATH="cd $APP_ROOT && export PATH=\"/home/webmaster/.rbenv/bin:/home/webmaster/.rbenv/shims:$PATH\""
+
+CMD="$SET_PATH; bundle exec unicorn $UNICORN_OPTS"
+
+old_pid="$PID.oldbin"
+
+cd $APP_ROOT || exit 1
+
+sig () {
+        test -s "$PID" && kill -$1 `cat $PID`
+}
+
+oldsig () {
+        test -s $old_pid && kill -$1 `cat $old_pid`
+}
+
+case ${1-help} in
+start)
+        sig 0 && echo >&2 "Already running" && exit 0
+	su - webmaster -c "$CMD"
+        ;;
+stop)
+        sig QUIT && exit 0
+        echo >&2 "Not running"
+        ;;
+force-stop)
+        sig TERM && exit 0
+        echo >&2 "Not running"
+        ;;
+restart|reload)
+        sig HUP && echo reloaded OK && exit 0
+        echo >&2 "Couldn't reload, starting '$CMD' instead"
+	su - webmaster -c "$CMD"
+        ;;
+upgrade)
+        sig USR2 && exit 0
+        echo >&2 "Couldn't upgrade, starting '$CMD' instead"
+        su - webmaster -c "$CMD"
+        ;;
+rotate)
+        sig USR1 && echo rotated logs OK && exit 0
+        echo >&2 "Couldn't rotate logs" && exit 1
+        ;;
+*)
+        echo >&2 "Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
+        exit 1
+        ;;
+esac

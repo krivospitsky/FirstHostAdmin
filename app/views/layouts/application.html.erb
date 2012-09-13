@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FirstHostAdmin</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+	<head>
+	  <title>FirstHostAdmin</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<%= image_tag("logo.png", :alt => "1stHostAdmin", :class => "round") %>
+				<nav class="round">
+	  				<ul>
+	    				<li><%= link_to "users", users_path %></li>
+	    				<li><%= link_to "domains", domains_path %></li>
+	    				<li><%= link_to "mailboxes", mailboxes_path %></li>
+	    				<li><%= link_to "Sign in", '#' %></li>
+	  				</ul>
+				</nav>
+			</header>
+		<section class="round">
+			<%= yield %>
+		</section>
+		</div>
+	</body>
 </html>

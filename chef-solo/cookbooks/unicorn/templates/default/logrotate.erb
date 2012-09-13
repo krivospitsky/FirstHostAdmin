@@ -1,0 +1,13 @@
+/home/webmaster/projects/<%= @app %>/shared/log/*.log {
+    daily
+    rotate 30
+    compress
+    missingok
+    notifempty
+    create 0640 webmaster webmaster
+    sharedscripts
+    lastaction
+	pid=/home/webmaster/projects/<%= @app %>/shared/unicorn.pid
+	test -s $pid && kill -USR1 "$(cat $pid)"
+    endscript
+}

@@ -1,0 +1,35 @@
+{
+  "authorization": {
+    "sudo": {
+      "passwordless": true,
+      "users": [
+        "webmaster"
+      ]
+    }
+  },
+  "nodejs": {
+    "install_method": "package"
+  },
+  "rbenv": {
+    "user_installs": [
+      {
+        "rubies": [
+          "1.9.3-p194"
+        ],
+        "global": "1.9.3-p194",
+        "gems": {
+          "1.9.3-p194": [
+            {
+              "name": "bundler"
+            },
+            {
+              "name": "rake"
+            }
+          ]
+        },
+        "user": "webmaster"
+      }
+    ]
+  },
+  "run_list": [ "recipe[packages]",  "recipe[sudo]", "recipe[nginx]", "recipe[ruby_build]", "recipe[rbenv::user]", "recipe[unicorn]", "recipe[nodejs]" ]
+}

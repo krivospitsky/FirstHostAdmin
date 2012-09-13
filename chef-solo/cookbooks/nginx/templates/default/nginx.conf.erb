@@ -1,0 +1,92 @@
+worker_processes 8;
+#user vasya vasya;
+
+pid /var/run/nginx.pid;
+
+error_log /var/log/nginx/nginx.error.log;
+
+worker_rlimit_nofile 1048576;
+
+events {
+  worker_connections 16384;
+  accept_mutex off;
+}
+
+http {
+  include mime.types;
+  default_type application/octet-stream;
+  sendfile on;
+  tcp_nopush on;
+  tcp_nodelay off;
+  gzip on;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_comp_level 5;
+  gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+  log_format time_log '$upstream_response_time $request';
+  log_format status_log '$status';
+  access_log /var/log/nginx/time.log time_log;
+  access_log /var/log/nginx/status.log status_log;
+  access_log /var/log/nginx/access.log combined;
+
+
+  server {
+    listen 127.0.0.1:8088;
+    server_name nginx_status;
+    location /server-status {
+      stub_status on;
+      access_log   off;
+      allow 127.0.0.1;
+      deny all;
+      }
+  }
+
+  server {
+    listen 8080 default deferred;
+    client_max_body_size 32M;
+    keepalive_timeout 5;
+    root /home/webmaster/projects/FirstHostAdmin/public;
+    try_files $uri/index.html $uri.html $uri @lbm;
+
+
+    location ~ ^/resque/ {
+      proxy_pass http://unix:/home/webmaster/projects/FirstHostAdmin/shared/unicorn.sock;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+    }
+
+    location @lbm {
+      proxy_pass http://unix:/home/webmaster/projects/FirstHostAdmin/shared/unicorn.sock;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+    }
+
+    location ~ ^/assets/ {
+      expires 1y;
+      add_header Cache-Control public;
+      add_header Last-Modified "";
+      add_header ETag "";
+      break;
+    }
+    location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|html|htm)$  {
+      expires 1y;
+      add_header Cache-Control public;
+      add_header Last-Modified "";
+      add_header ETag "";
+      root /home/webmaster/projects/FirstHostAdmin/public;
+    }
+
+
+    #    error_page 500 502 503 504 /500.html;
+    location = /500.html {
+      root /home/webmaster/projects/FirstHostAdmin/public;
+    }
+    location = /404.html {
+      root /home/webmaster/projects/FirstHostAdmin/public;
+    }
+  }
+}
+

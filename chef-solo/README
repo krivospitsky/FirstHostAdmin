@@ -1,0 +1,4 @@
+Установка
+curl -L https://raw.github.com/krivospitsky/FirstHostAdmin-chef/master/install.sh | sudo bash
+Обновление кода
+curl -L https://raw.github.com/krivospitsky/FirstHostAdmin-chef/master/refresh.sh | bash
