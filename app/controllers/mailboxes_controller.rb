@@ -44,7 +44,7 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.save
-        format.html { redirect_to @mailbox, notice: 'Mailbox was successfully created.' }
+        format.html { redirect_to mailboxes_path, notice: 'Mailbox was successfully created.' }
         format.json { render json: @mailbox, status: :created, location: @mailbox }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.update_attributes(params[:mailbox])
-        format.html { redirect_to @mailbox, notice: 'Mailbox was successfully updated.' }
+        format.html { redirect_to mailboxes_path, notice: 'Mailbox was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

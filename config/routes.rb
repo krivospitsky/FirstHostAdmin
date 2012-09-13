@@ -1,11 +1,20 @@
 FirstHostAdmin::Application.routes.draw do
 
+#  get "sessions/login"
+  post "sessions/login_attempt"
+  get "sessions/home"
+  get "sessions/profile"
+  get "sessions/setting"
+
   resources :mailboxes
   resources :domains
   resources :users
+  match "login", :to => "sessions#login"
+  match "logout", :to => "sessions#logout"
 
-  resource :user_session
-  root :controller => "user_sessions", :action => "new" # optional, this just sets the root route
+   #root :controller => "user_sessions", :action => "new" # optional, this just sets the root route
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

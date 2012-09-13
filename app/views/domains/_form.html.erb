@@ -1,33 +1,32 @@
-<%= form_for(@domain) do |f| %>
-  <% if @domain.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@domain.errors.count, "error") %> prohibited this domain from being saved:</h2>
-
-      <ul>
-      <% @domain.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @domain, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :fqdn, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :fqdn, :class => 'text_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :alias, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :alias, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_select :user_id, User.all, :id, :name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :mail_path, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :mail_path, :class => 'text_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :fqdn %><br />
-    <%= f.text_field :fqdn %>
-  </div>
-  <div class="field">
-    <%= f.label :alias %><br />
-    <%= f.text_field :alias %>
-  </div>
-  <div class="field">
-    <%= f.label :mail_path %><br />
-    <%= f.text_field :mail_path %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.collection_select :user_id, User.all, :id, :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                domains_path, :class => 'btn' %>
   </div>
 <% end %>
