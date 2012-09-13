@@ -1,0 +1,27 @@
+<% Domain.all.each do |domain| %>
+<VirtualHost *:80>
+        ServerName <%= domain.fqdn %>
+        CustomLog /home/<%= domain.user.name %>/httpd-logs/<%= domain.fqdn %>.access.log combined
+        ErrorLog /home/<%= domain.user.name %>/httpd-logs/<%= domain.fqdn %>.error.log
+        DocumentRoot /home/<%= domain.user.name %>/www/%path%
+        ServerAdmin <%= domain.user.email %>
+        <% if domain.alias %>ServerAlias <%= domain.alias %><% end %>
+        AssignUserID <%= domain.user.name %> <%= domain.user.name %>
+        ScriptAlias /cgi-bin/ /home/<%= domain.user.name %>/www/<%= domain.fqdn %>/cgi-bin/
+        AddType application/x-httpd-php .php .php3 .php4 .php5 .phtml
+        AddType application/x-httpd-php-source .phps
+        php_admin_value open_basedir "/home/<%= domain.user.name %>/:/var/lib/roundcube/:/usr/share/roundcube/:/usr/share/php/:/etc/roundcube/:/var/lib/phpmyadmin/:/usr/share/phpmyadmin/:/var/lib/postfixadmin"
+        php_admin_value sendmail_path "/usr/sbin/sendmail -t -i -f <%= domain.user.email %>"
+        php_admin_value upload_tmp_dir "/home/<%= domain.user.name %>/tmp"
+        php_admin_value session.save_path "/home/<%= domain.user.name %>/tmp"
+        <% if domain.mail_path.length>0 %>Alias /<%= domain.mail_path %> /var/lib/roundcube <% end %>
+</VirtualHost>
+
+
+<Directory /home/<%= domain.user.name %>/www/<%= domain.fqdn %>>
+        AllowOverride All
+        Options -ExecCGI -Includes
+        php_admin_value open_basedir "/home/<%= domain.user.name %>/"
+        php_admin_flag engine on
+</Directory>
+<% end %>
