@@ -7,14 +7,16 @@ class Domain < ActiveRecord::Base
   validates :fqdn, :presence => true, :uniqueness => true, :format => FQDN_REGEX
   validates :user_id, :presence => true
 
-
   def self.gen_apache_cfg
-	filename = 'app\views\domains\apache_host.cfg.erb'
-	erb = ERB.new(File.read(filename))
-	erb.filename = filename
-#	File.open('/etc/apache2/sites', 'w') {|f| f.write(erb.result) }
-	File.open('d:/tmp/1.cfg', 'w') {|f| f.write(erb.result) }
-	#Domain.all
+  	filename = 'app\views\domains\apache_host.cfg.erb'
+  	erb = ERB.new(File.read(filename))
+  	erb.filename = filename
+    if Rails.env.production?
+      out_file='/etc/apache2/sites'
+    else
+      out_file='d:/tmp/1.cfg'
+    end
+  	File.open(out_file, 'w') {|f| f.write(erb.result) }
   end
 
   def self.gen_nginx_cfg

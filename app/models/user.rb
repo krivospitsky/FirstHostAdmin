@@ -24,11 +24,15 @@ class User < ActiveRecord::Base
 
 	def self.authenticate(username="", password="")
 		user = User.find_by_name(username)
-		require 'rpam'
-		if user && Rpam.auth(username, password)
-			return user
+		if Rails.env.production?
+			require 'rpam'
+			if user && Rpam.auth(username, password)
+				return user
+			else
+				return false
+			end
 		else
-			return false
+			return user
 		end
 	end
 end
