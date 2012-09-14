@@ -11,12 +11,7 @@ class Domain < ActiveRecord::Base
   	filename = 'app/views/domains/apache_host.cfg.erb'
   	erb = ERB.new(File.read(filename))
   	erb.filename = filename
-    if Rails.env.production?
-      out_file='/home/webmaster/generated_cfg/apache_sites.conf'
-    else
-      out_file='d:/tmp/1.cfg'
-    end
-  	File.open(out_file, 'w') {|f| f.write(erb.result) }
+  	File.open('generated_cfg/apache_sites.conf', 'w') {|f| f.write(erb.result) }
   end
 
   def self.gen_nginx_cfg
