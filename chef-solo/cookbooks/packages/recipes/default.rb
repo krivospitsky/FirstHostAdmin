@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w{zlib1g-dev mc screen rsync phpmyadmin phppgadmin roundcube mysql-server apache2-mpm-itk libpam0g-dev php-fpm}.each do |package_name|
+%w{zlib1g-dev mc screen rsync phpmyadmin phppgadmin roundcube mysql-server apache2-mpm-itk libpam0g-dev php5-fpm}.each do |package_name|
   package package_name do
     action :install
   end
