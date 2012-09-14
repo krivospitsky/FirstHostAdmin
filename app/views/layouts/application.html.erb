@@ -30,8 +30,8 @@
           </a>
           <a class="brand" href="#">1stHostAdmin</a>
           <div class="container nav-collapse">
-            <ul class="nav">
-				      <% if @current_user %><li>Logged as: <%= @current_user.name %></li><li><%= link_to "Sign out", logout_path %></li><% else %><li><%= link_to "Sign in", login_path %></li><% end %>
+            <ul class="nav pull-right">
+				      <% if @current_user %><li><%= link_to "Logged as: " + @current_user.name, '/' %></li><li><%= link_to "Sign out", logout_path %></li><% else %><li><%= link_to "Sign in", login_path %></li><% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -45,10 +45,19 @@
               <div class="well sidebar-nav">
                 <h3>Sidebar</h3>
                 <ul class="nav nav-list">
-                  <li class="nav-header">Sidebar</li>
-          				<li><%= link_to "users", users_path %></li>
-          				<li><%= link_to "domains", domains_path %></li>
-          				<li><%= link_to "mailboxes", mailboxes_path %></li>
+                  <li class="nav-header">Main menu</li>
+          				<li><%= link_to "Users", users_path %></li>
+          				<li><%= link_to "Domains", domains_path %></li>
+                  <li><%= link_to "Mailboxes", mailboxes_path %></li>
+                  <li><%= link_to "File manager", '#' %></li>
+                  <li>Databases<ul class="nav nav-list">
+                    <li><%= link_to "Manage", '#' %></li>
+                    <li><%= link_to "phpMyAdmin", '/phpMyAdmin' %></li>
+                    <li><%= link_to "phpPgAdmin", '/phpPgAdmin' %></li>
+                  </ul></li>
+                  <li><%= link_to "Cron tasks", '#' %></li>
+                  <li><%= link_to "Services", '#' %></li>
+                  <li><%= link_to "Reboot", '#' %></li>
                 </ul>
               </div><!--/.well -->
             </div><!--/span-->

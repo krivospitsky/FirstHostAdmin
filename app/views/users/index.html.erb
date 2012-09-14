@@ -5,6 +5,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:role) %></th>
       <th><%= model_class.human_attribute_name(:gid) %></th>
       <th><%= model_class.human_attribute_name(:uid) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -15,6 +16,7 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
+        <td><%= User::UR_names[user.role] %></td>
         <td><%= user.gid %></td>
         <td><%= user.uid %></td>
         <td>

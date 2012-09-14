@@ -1,18 +1,16 @@
 FirstHostAdmin::Application.routes.draw do
 
-#  get "sessions/login"
-  post "sessions/login_attempt"
-  get "sessions/home"
-  get "sessions/profile"
-  get "sessions/setting"
 
   resources :mailboxes
   resources :domains
   resources :users
+  post "sessions/login_attempt"
   match "login", :to => "sessions#login"
   match "logout", :to => "sessions#logout"
 
-   #root :controller => "user_sessions", :action => "new" # optional, this just sets the root route
+  mount Saphira::Engine => "/saphira", :as => 'saphira'
+
+  root :controller => "sessions", :action => "login"
 
 
 

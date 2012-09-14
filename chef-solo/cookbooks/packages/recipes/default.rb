@@ -7,12 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w{zlib1g-dev mc screen rsync}.each do |package_name|
+%w{zlib1g-dev mc screen rsync phpmyadmin phppgadmin roundcube mysql-server apach22-mm-itk}.each do |package_name|
   package package_name do
     action :install
   end
 end
-                
+
 =begin
 %w{irqbalance}.each do |service_name|
   service service_name do
