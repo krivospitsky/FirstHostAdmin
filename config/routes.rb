@@ -5,6 +5,7 @@ FirstHostAdmin::Application.routes.draw do
   resources :domains
   resources :users
   post "sessions/login_attempt"
+  get "sessions/login"
   match "login", :to => "sessions#login"
   match "logout", :to => "sessions#logout"
 
