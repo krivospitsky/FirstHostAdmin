@@ -35,7 +35,7 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 platforms :ruby do # linux
-	gem 'rpam'
+	gem 'rpam-ruby19'
 	# Use unicorn as the app server
 	gem 'unicorn'
 end
