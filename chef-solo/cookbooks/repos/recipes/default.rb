@@ -19,6 +19,7 @@ if node.platform == "debian"
     uri "http://packages.dotdeb.org"
     components ["stable", "all"]
     action :add
+    key_url "http://www.dotdeb.org/dotdeb.gpg"
   end
 
 
