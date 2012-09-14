@@ -31,5 +31,5 @@
       }
     ]
   },
-  "run_list": [ "recipe[packages]",  "recipe[sudo]", "recipe[nginx]", "recipe[ruby_build]", "recipe[rbenv::user]", "recipe[unicorn]", "recipe[nodejs]" ]
+  "run_list": [ "recipe[apt]",  "recipe[repos]",  "recipe[packages]",  "recipe[sudo]", "recipe[nginx]", "recipe[ruby_build]", "recipe[rbenv::user]", "recipe[unicorn]", "recipe[nodejs]" ]
 }

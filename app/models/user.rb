@@ -23,11 +23,9 @@ class User < ActiveRecord::Base
 	end
 
 	def self.authenticate(username="", password="")
-		require 'rpam'
-		include Rpam
 		user = User.find_by_name(username)
-
-		if user && authpam(username, password)
+		require 'rpam'
+		if user && Rpam.auth(username, password)
 			return user
 		else
 			return false
