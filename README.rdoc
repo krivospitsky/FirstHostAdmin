@@ -1,4 +1,4 @@
 Установка
 curl -L https://raw.github.com/krivospitsky/FirstHostAdmin/master/install.sh | sudo bash
 Обновление кода
-curl -L https://raw.github.com/krivospitsky/FirstHostAdmin/master/refresh.sh | bash
+curl -L https://raw.github.com/krivospitsky/FirstHostAdmin/master/update.sh | bash

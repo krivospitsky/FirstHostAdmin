@@ -17,7 +17,6 @@ if node.platform == "debian"
 
   apt_repository "dotdeb" do
     uri "http://packages.dotdeb.org"
-    distribution "dotdeb"
     components ["stable", "all"]
     action :add
   end
