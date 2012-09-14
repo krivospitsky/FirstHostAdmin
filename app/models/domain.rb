@@ -8,7 +8,7 @@ class Domain < ActiveRecord::Base
   validates :user_id, :presence => true
 
   def self.gen_apache_cfg
-  	filename = 'app\views\domains\apache_host.cfg.erb'
+  	filename = 'app/views/domains/apache_host.cfg.erb'
   	erb = ERB.new(File.read(filename))
   	erb.filename = filename
     if Rails.env.production?
