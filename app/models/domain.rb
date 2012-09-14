@@ -12,7 +12,7 @@ class Domain < ActiveRecord::Base
   	erb = ERB.new(File.read(filename))
   	erb.filename = filename
     if Rails.env.production?
-      out_file='/etc/apache2/sites'
+      out_file='/home/webmaster/generated_cfg/apache_sites.conf'
     else
       out_file='d:/tmp/1.cfg'
     end

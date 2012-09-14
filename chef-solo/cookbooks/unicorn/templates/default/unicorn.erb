@@ -17,7 +17,7 @@ ulimit -n 1000000
 # Change these to match your app:
 APP_NAME=<%= @app %>
 APP_ROOT="/home/webmaster/projects/$APP_NAME"
-PID="/home/webmaster/projects/$APP_NAME/shared/unicorn.pid"
+PID="/home/webmaster/projects/$APP_NAME/tmp/pids/unicorn.pid"
 ENV=production
 
 UNICORN_OPTS="-D -E $ENV -c /etc/unicorn/$APP_NAME.rb"

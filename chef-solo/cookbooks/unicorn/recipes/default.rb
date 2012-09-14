@@ -25,8 +25,8 @@ app_name = 'FirstHostAdmin'
 dir = "/home/webmaster/projects/#{app_name}"
 
 unicorn_config "/etc/unicorn/#{app_name}.rb" do
-  listen({ "#{dir}/shared/unicorn.sock" => { :tcp_nodelay => true, :backlog => 100 } })
-  pid "#{dir}/shared/unicorn.pid"
+  listen({ "#{dir}/tmp/sockets/unicorn.sock" => { :tcp_nodelay => true, :backlog => 100 } })
+  pid "#{dir}/tmp/pids/unicorn.pid"
   working_directory "#{dir}"
   worker_timeout 60
   preload_app true

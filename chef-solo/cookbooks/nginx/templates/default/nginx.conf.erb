@@ -74,7 +74,7 @@ http {
 
 
     location @rails {
-      proxy_pass http://unix:/home/webmaster/projects/FirstHostAdmin/shared/unicorn.sock;
+      proxy_pass http://unix:/home/webmaster/projects/FirstHostAdmin/tmp/sockets/unicorn.sock;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header Host $http_host;
       proxy_redirect off;
