@@ -40,9 +40,5 @@ platforms :ruby do # linux
 	gem 'unicorn'
 end
 
-if ENV['RAILS_ENV'] == "production"
-	gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
-else
-	gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
-end
+gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
 
