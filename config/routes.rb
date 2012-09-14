@@ -8,8 +8,6 @@ FirstHostAdmin::Application.routes.draw do
   match "login", :to => "sessions#login"
   match "logout", :to => "sessions#logout"
 
-  mount Saphira::Engine => "/saphira", :as => 'saphira'
-
   root :controller => "sessions", :action => "login"
 
 
