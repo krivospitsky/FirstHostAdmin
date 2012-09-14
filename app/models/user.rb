@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
 	before_create :do_create
 	def do_create
-		system("sudo adduser #{self.name} && adduser #{self.name} www-data")
+		#system("sudo adduser #{self.name} && adduser #{self.name} www-data")
 	end
 
 	before_destroy :do_destroy
