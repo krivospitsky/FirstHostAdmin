@@ -25,10 +25,10 @@ class User < ActiveRecord::Base
 	def self.authenticate(username="", password="")
 		user = User.find_by_name(username)
 
-#		if user && authpam(username, password)
+		if user && authpam(username, password)
 			return user
-#		else
-#			return false
-#		end
+		else
+			return false
+		end
 	end
 end
