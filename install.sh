@@ -8,7 +8,7 @@ git clone git@github.com:krivospitsky/FirstHostAdmin.git
 mkdir -p /home/webmaster/projects/FirstHostAdmin/shared
 chown webmaster:webmaster /home/webmaster/projects/FirstHostAdmin/ -R
 
-chef-solo -c /home/webmaster/projects/FirstHostAdmin/chef-solo/solo.rb -j /home/webmaster/projects/FirstHostAdmin/chef-solo/node.json
+chef-solo -c /home/webmaster/projects/FirstHostAdmin/chef-solo/solo.rb
 
 sudo -u webmaster bundle install
 sudo -u webmaster rake assets:precompile
