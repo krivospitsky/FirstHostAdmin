@@ -28,11 +28,6 @@ gem 'jquery-rails'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-platforms :ruby do # linux
-  gem 'unicorn'
-end
-
 # Deploy with Capistrano
 # gem 'capistrano'
 
@@ -41,6 +36,13 @@ end
 
 platforms :ruby do # linux
 	gem 'rpam'
+	# Use unicorn as the app server
+	gem 'unicorn'
 end
 
-gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
+if ENV['RAILS_ENV'] == "production"
+	gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
+else
+	gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
+end
+
